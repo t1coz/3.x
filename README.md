@@ -1,4 +1,4 @@
-# ***3.x***
+# ***3.x, ***
 
 # 3.1
 
@@ -11,3 +11,7 @@
 # 3.2
 
 tbc
+
+<p align="center">
+   <img src="https://usagif.com/wp-content/uploads/gif/hamster-wheel-32.gif" alt="animated" />
+</p>
