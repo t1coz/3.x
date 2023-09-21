@@ -13,12 +13,15 @@ void Circumference::interface(){
                 "1. Set new radius;\n"
                 "2. Calculate an area of the Circumference;\n"
                 "3. Calculate a circumference of the Circumference;\n"
-                "4. Get the radius value.\n\n"
+                "4. Get the radius value;\n"
+                "5. Show all the data together;\n"
+                "6. Change radius value;\n"
+                "7. Show address of radius value;\n"
                 << RED << "99. Exit the program.\n" << RESET
                 << BLUE << "Input: " << RESET;
         int choice;
         while (true){
-            if (cin >> choice && (choice>=1 && choice <=4) || choice == 99){
+            if (cin >> choice && (choice>=1 && choice <=7) || choice == 99){
                 if (choice == 99){
                     cout << "\n" << RED << "Finishing the program.";
                     return;
@@ -30,7 +33,20 @@ void Circumference::interface(){
                         case 3:
                             cout << "Circumference of the circumference is " << circumferenceOfCirc() << "." << endl; break;
                         case 4:
-                            cout << "The value of radius is " << getRadius() << "." << endl; break;
+                            displayData(getRadius()); break;
+                        case 5:
+                            displayData(getRadius(), areaOfCirc(), circumferenceOfCirc()); break;
+                        case 6:{
+                            Circumference result;
+                            double value;
+                            cout << "Enter the value: ";
+                            cin >> value;
+                            *this = *this + value;
+                            cout << "New radius is " << this->getRadius() << ".\n";
+                        }
+                        case 7:
+                            cout << "The address of radius is " << &radius << ".\n";
+
                         default: break;
                     }
                 }
@@ -43,10 +59,10 @@ void Circumference::interface(){
         }
     }
 }
-double Circumference::areaOfCirc(){
+double Circumference::areaOfCirc() const{
     return pow(radius, 2)*M_PI;
 }
-double Circumference::circumferenceOfCirc(){
+double Circumference::circumferenceOfCirc() const{
     return 2*radius*M_PI;
 }
 void Circumference::setRadius(){
@@ -63,6 +79,25 @@ void Circumference::setRadius(){
         }
     }
 }
-double Circumference::getRadius(){
+void Circumference::displayData(double radius){
+    cout << "The value of radius is " << radius << ".\n";
+}
+void Circumference::displayData(double radius, double area, double circumference){
+    cout << "The value of radius is " << radius << ".\n";
+    cout << "The area is " << area << ".\n";
+    cout << "The circumference is " << circumference << ".\n";
+}
+double Circumference::getRadius() const{
     return radius;
+}
+Circumference::Circumference(){
+    radius = 0;
+}
+Circumference Circumference::operator+ (double value) const{
+    Circumference temp;
+    temp.radius = this->radius + value;
+    return temp;
+}
+double* Circumference::operator& (){
+    return &this->radius;
 }

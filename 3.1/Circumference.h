@@ -5,13 +5,16 @@ class Circumference{
     double radius;
 
 public:
-    double areaOfCirc();
-    double circumferenceOfCirc();
+    Circumference();
+    double areaOfCirc() const;
+    double circumferenceOfCirc() const;
     void interface();
     void setRadius();
-    double getRadius();
-    Circumference(){
-        radius = 0;
-    }
+    double getRadius() const;
+    static void displayData(double radius);
+    static void displayData(double radius, double area, double circumference);
+    Circumference operator+ (double value) const;
+    double* operator&();
+
 };
 #endif
