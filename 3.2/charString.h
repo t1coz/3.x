@@ -25,7 +25,7 @@ public:
     void setString();
     void printString() const;
     void inputAsterisk(const CharString& obj);
-    void checkRangeInput(int* start, int* end) const;
+    int checkRangeInput(int* start, int* end) const;
 
     CharString& operator=(const CharString &obj);
     CharString operator+(const CharString &obj);

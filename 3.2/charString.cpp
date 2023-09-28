@@ -48,7 +48,7 @@ void CharString :: functionsSelection(int choice){
             tempSecond.setString();
             tempThird.setString();
             *this = tempSecond + tempThird;
-            cout << "Final string is ";
+            cout << "Final string: ";
             this->printString();
             break;
         }
@@ -95,8 +95,10 @@ void CharString :: functionsSelection(int choice){
         }
         case 7:{
             int start, end;
-            checkRangeInput(&start, &end);
-            (*this)(start-1, end-1);
+            //checkRangeInput(&start, &end);
+            if(checkRangeInput(&start, &end) != -1){
+                (*this)(start-1, end-1);
+            }
             break;
         }
         case 8:{
@@ -151,20 +153,29 @@ void CharString::setString(){
 int CharString :: getLength() const{
     return length;
 }
+void CharString :: inputAsterisk(const CharString& obj){
+    CharString temp("*");
+    int difference = obj.length - this->length;
+    for (int i = 0; i < difference; i++) {
+        *this += temp;
+    }
+}
 void CharString :: printString() const{
     for (int i = 0; i < this->getLength(); i++) {
         cout << str[i];
     }
     cout << "\n";
 }
-void CharString :: checkRangeInput(int* start, int* end) const{
+int CharString :: checkRangeInput(int* start, int* end) const{
     cout << "Select start character (out of " << this->length << "): ";
     *start = methodOfInputRange(this->length);
     cout << "Select end character (out of " << this->length <<"): ";
     *end = methodOfInputRange(this->length);
-    if (*end >=  *start){
+    if (*end <=  *start){
         cout << "The interval is not valid.\n";
+        return -1;
     }
+    return 0;
 }
 //overloads
 CharString& CharString :: operator=(const CharString &obj){
@@ -213,13 +224,6 @@ int CharString:: operator!=(const CharString& obj)const{
         return -1;
     }else{
         return 0;
-    }
-}
-void CharString :: inputAsterisk(const CharString& obj){
-    CharString temp("*");
-    int difference = obj.length - this->length;
-    for (int i = 0; i < difference; i++) {
-        *this += temp;
     }
 }
 void CharString :: operator()(int start, int end){
