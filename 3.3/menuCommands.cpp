@@ -1,0 +1,72 @@
+#include "menuCommands.h"
+#include "media.h"
+void interface(Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSeasonShow){
+    while(true){
+        cout << MAGENTA <<"\nChoose the operation:\n"
+                          "1. Set new movie;\n"
+                          "2. Print movie data;\n"
+                          "3. Set new comic;\n"
+                          "4. Print comic data\n"
+                          "5. Set new show;\n"
+                          "6. Print show data;\n"
+                          "7. Set new multi season show\n"
+                          "8. Print show multi season show;\n\n"
+             << RED << "99. Exit the program.\n" << RESET
+             << BLUE << "Input: " << RESET;
+        int choice;
+        while (true){
+            if (cin >> choice && (choice>=1 && choice <=8) || choice == 99){
+                if (choice == 99){
+                    cout << "\n" << RED << "Finishing the program.";
+                    return;
+                }else{
+                    functionsSelection(choice, movie, comic, show, multiSeasonShow);
+                }
+                break;
+            }else{
+                cout << "Invalid Input! Enter the number of operation: ";
+                cin.clear();
+                while (cin.get() != '\n');
+            }
+        }
+    }
+}
+void getStr(char **string){
+    int size = 0;
+    int realSize = 16;
+    *string = (char *)malloc(realSize * sizeof(char));
+    rewind(stdin);
+    char check;
+    while (1) {
+        check = (char)getchar();
+        if (check == '\n') {
+            if (size + 1 < realSize) {
+                *string = (char *) realloc(*string, (size + 1) * sizeof(char));
+            }
+            (*string)[size] = '\0';
+            return;
+        }
+        (*string)[size] = check;
+        size++;
+        if (size + 1 == realSize) {
+            realSize *= 2;
+            *string = (char *) realloc(*string, realSize * sizeof(char));
+        }
+    }
+}
+int methodOfInput(int size){
+    int num;
+    while (scanf("%d", &num) != 1 || (!(num >=1 && num <=size)&& num != 99) || getchar() != '\n') {
+        printf("Try better:\n");
+        rewind(stdin);
+    }
+    return num;
+}
+int methodOfInputRange(int size){
+    int num;
+    while (scanf("%d", &num) != 1 || (!(num >=1 && num <=size)) || getchar() != '\n') {
+        printf("Try better:\n");
+        rewind(stdin);
+    }
+    return num;
+}
