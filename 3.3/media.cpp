@@ -16,7 +16,7 @@ const char* Title :: getTitle() const{
 
 void Movie :: setLength(){
     int aLength;
-    cout << "Enter a length of the movie in minutes: ";
+    cout << "Enter a length in minutes: ";
     while (true) {
         if (cin >> aLength && aLength > 0) {
             length = aLength;
@@ -155,6 +155,75 @@ void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, Mult
             cout << "Number of seasons: " << multiSeasonShow->getSeasons() << endl;
             break;
         }
+        case 9:{
+            cout <<"\nChoose the comparison:\n"
+                      "1. Movie and a Show;\n"
+                      "2. Show and multiSeason show;\n"
+                      "Choice: ";
+            int answer = methodOfInputRange(2);
+            if(answer == 1){
+                cout << "Is it a multiSeason show? ";
+                char decision = yesOrNo();
+                if (decision == 'y'){
+                    multiSComparison(*movie, *multiSeasonShow);
+                }else{
+                    singleSComparison(*movie, *show);
+                }
+            }else{
+                showsComparison(*show, *multiSeasonShow);
+            }
+        }
+        case 10:{
+            episodesComparison(*show, *multiSeasonShow);
+        }
         default: break;
+    }
+}
+void multiSComparison(const Movie movie, const MultiSeasonShow show){
+    if(movie.getLength() > show.getLength()){
+        cout << GREEN <<  "Movie length is " << movie.getLength() - show.getLength()
+        << " minutes longer.\n";
+
+    }else if(movie.getLength() < show.getLength()){
+        cout << GREEN <<  "Show length is " << show.getLength() - movie.getLength()
+             << " minutes longer.\n";
+    }else{
+        cout << GREEN <<  "Movie and the show are identical in length.\n";
+    }
+}
+void singleSComparison(const Movie movie, const Show show){
+    if(movie.getLength() > show.getLength()){
+        cout << GREEN <<  "Movie length is " << movie.getLength() - show.getLength()
+             << " minutes longer.\n";
+
+    }else if(movie.getLength() < show.getLength()){
+        cout << GREEN <<  "Show length is " << show.getLength() - movie.getLength()
+             << " minutes longer.\n";
+    }else{
+        cout << GREEN <<  "Movie and the show are identical in length.\n";
+    }
+}
+void showsComparison(const Show sShow, const MultiSeasonShow mShow){
+    if(sShow.getLength() > mShow.getLength()){
+        cout << GREEN <<  "Single season show length is " << sShow.getLength() - mShow.getLength()
+             << " minutes longer.\n";
+
+    }else if(sShow.getLength() < mShow.getLength()){
+        cout << GREEN << "MultiSeason show length is " << mShow.getLength() - sShow.getLength()
+             << " minutes longer.\n";
+    }else{
+        cout << GREEN <<  "Shows are identical in length.\n";
+    }
+}
+void episodesComparison(Show show, MultiSeasonShow mShow){
+    if(show.getEpisodes() > mShow.getEpisodes()){
+        cout << GREEN <<  "Single season has " << show.getEpisodes() - mShow.getEpisodes()
+             << " more episodes.\n";
+
+    }else if(show.getEpisodes() < mShow.getEpisodes()){
+        cout << GREEN << "MultiSeason show has " << mShow.getEpisodes() - show.getEpisodes()
+             << " more episodes.\n";
+    }else{
+        cout << GREEN <<  "Shows have the same number of episodes.\n";
     }
 }

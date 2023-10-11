@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
+
 class Title{
     char title[TITLE_SIZE];
 public:

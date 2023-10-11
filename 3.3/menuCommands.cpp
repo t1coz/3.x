@@ -10,12 +10,14 @@ void interface(Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSea
                           "5. Set new show;\n"
                           "6. Print show data;\n"
                           "7. Set new multi season show\n"
-                          "8. Print show multi season show;\n\n"
-             << RED << "99. Exit the program.\n" << RESET
-             << BLUE << "Input: " << RESET;
+                          "8. Print show multi season show;\n"
+                  <<BLUE<<"9. Compare duration of movie with a show;\n"
+                          "10.Compare number of episodes in shows;\n"
+             << RED << "99. Exit the program.\n\n" << RESET
+             << GREEN << "Input: " << RESET;
         int choice;
         while (true){
-            if (cin >> choice && (choice>=1 && choice <=8) || choice == 99){
+            if (cin >> choice && (choice>=1 && choice <=10) || choice == 99){
                 if (choice == 99){
                     cout << "\n" << RED << "Finishing the program.";
                     return;
@@ -54,14 +56,6 @@ void getStr(char **string){
         }
     }
 }
-int methodOfInput(int size){
-    int num;
-    while (scanf("%d", &num) != 1 || (!(num >=1 && num <=size)&& num != 99) || getchar() != '\n') {
-        printf("Try better:\n");
-        rewind(stdin);
-    }
-    return num;
-}
 int methodOfInputRange(int size){
     int num;
     while (scanf("%d", &num) != 1 || (!(num >=1 && num <=size)) || getchar() != '\n') {
@@ -69,4 +63,17 @@ int methodOfInputRange(int size){
         rewind(stdin);
     }
     return num;
+}
+char yesOrNo(){
+    char userAnswer;
+    while (1){
+        cout << "Make a decision (y/n): " ;
+        cin >> userAnswer;
+        userAnswer = tolower(userAnswer);
+        if (userAnswer == 'y' || userAnswer == 'n')
+            break;
+        cout << "You may only type 'y' or 'n'.\n";
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    return userAnswer;
 }
