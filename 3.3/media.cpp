@@ -104,8 +104,6 @@ int MultiSeasonShow :: getSeasons() const{
 }
 
 void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSeasonShow){
-    char* userString = nullptr;
-    int localChoice;
     switch (choice) {
         case 1:{
             movie->setTitle();
@@ -113,8 +111,7 @@ void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, Mult
             break;
         }
         case 2:{
-            cout << "Title: " << movie->getTitle() << endl;
-            cout << "Length: " << movie->getLength() << endl;
+            movie->printMovie();
             break;
         }
         case 3:{
@@ -124,9 +121,7 @@ void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, Mult
             break;
         }
         case 4:{
-            cout << "Title: " << comic->getTitle() << endl;
-            cout << "Number of volumes: " << comic->getVolumes() << endl;
-            cout << "Number of pages in volume: " << comic->getPages() << endl;
+            comic->printComic();
             break;
         }
         case 5:{
@@ -136,9 +131,7 @@ void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, Mult
             break;
         }
         case 6:{
-            cout << "Title: " << show->getTitle() << endl;
-            cout << "Length: " << show->getLength() << endl;
-            cout << "Number of episodes: " << show->getEpisodes() << endl;
+            show->printShow();
             break;
         }
         case 7:{
@@ -149,10 +142,7 @@ void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, Mult
             break;
         }
         case 8:{
-            cout << "Title: " << multiSeasonShow->getTitle() << endl;
-            cout << "Length: " << multiSeasonShow->getLength() << endl;
-            cout << "Number of episodes: " << multiSeasonShow->getEpisodes() << endl;
-            cout << "Number of seasons: " << multiSeasonShow->getSeasons() << endl;
+            multiSeasonShow->printMShow();
             break;
         }
         case 9:{
@@ -178,6 +168,27 @@ void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, Mult
         }
         default: break;
     }
+}
+void Title :: printTitle() const{
+    cout << "Title: " << this->getTitle() << endl;
+}
+void Movie :: printMovie() const{
+    this->printTitle();
+    cout << "Length: " << this->getLength() << endl;
+}
+void Comic :: printComic() const {
+    this->printTitle();
+    cout << "Number of volumes: " << this->getVolumes() << endl;
+    cout << "Number of pages in volume: " << this->getPages() << endl;
+}
+void Show :: printShow() const{
+    //this->printTitle();
+    this->printMovie();
+    cout << "Number of episodes: " << this->getEpisodes() << endl;
+}
+void MultiSeasonShow :: printMShow() const{
+    this->printShow();
+    cout << "Number of seasons: " << this->getSeasons() << endl;
 }
 void multiSComparison(const Movie movie, const MultiSeasonShow show){
     if(movie.getLength() > show.getLength()){

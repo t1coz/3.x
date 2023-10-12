@@ -4,13 +4,13 @@ void interface(Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSea
     while(true){
         cout << MAGENTA <<"\nChoose the operation:\n"
                           "1. Set new movie;\n"
-                          "2. Print movie data;\n"
+                          "2. Print movie data;\n\n"
                           "3. Set new comic;\n"
-                          "4. Print comic data\n"
+                          "4. Print comic data\n\n"
                           "5. Set new show;\n"
-                          "6. Print show data;\n"
+                          "6. Print show data;\n\n"
                           "7. Set new multi season show\n"
-                          "8. Print show multi season show;\n"
+                          "8. Print show multi season show;\n\n"
                   <<BLUE<<"9. Compare duration of movie with a show;\n"
                           "10.Compare number of episodes in shows;\n"
              << RED << "99. Exit the program.\n\n" << RESET
@@ -19,7 +19,7 @@ void interface(Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSea
         while (true){
             if (cin >> choice && (choice>=1 && choice <=10) || choice == 99){
                 if (choice == 99){
-                    cout << "\n" << RED << "Finishing the program.";
+                    cout << "\n" << RED << "Finishing the program.\n";
                     return;
                 }else{
                     functionsSelection(choice, movie, comic, show, multiSeasonShow);

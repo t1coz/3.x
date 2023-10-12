@@ -8,15 +8,14 @@
 #include "media.h"
 
 void getStr(char **string);
-int methodOfInput(int size);
 int methodOfInputRange(int size);
 void interface(Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSeasonShow);
 void functionsSelection(int choice, Movie *movie, Comic *comic, Show *show, MultiSeasonShow *multiSeasonShow);
 char yesOrNo();
 
-void multiSComparison(const Movie movie, const MultiSeasonShow show);
-void singleSComparison(const Movie movie, const Show show);
-void showsComparison(const Show sShow, const MultiSeasonShow mShow);
+void multiSComparison(Movie movie, MultiSeasonShow show);
+void singleSComparison(Movie movie, Show show);
+void showsComparison(Show sShow, MultiSeasonShow mShow);
 
 void episodesComparison(Show show, MultiSeasonShow mShow);
 #endif
