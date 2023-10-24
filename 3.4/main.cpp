@@ -2,8 +2,8 @@
 #include "list.h"
 
 int main(){
-    LinkedList<float> list;
-    float data;
+    LinkedList<double> list;
+    double data;
     int index;
     cout << "List template." << endl;
     while(true){
@@ -47,11 +47,7 @@ int main(){
                         case 5:{
                             cout<<"Enter the index:"<<endl;
                             cin>>index;
-                            if (list.get(index-1) != -33333){
-                                cout<<"Item at the index "<<index<<": "<<list.get(index-1)<<"\n";
-                            }else{
-                                cout<<"Unable to print data.";
-                            }
+                            cout<<"Item at the index "<<index<<": "<<list.get(index-1)<<"\n";
                             break;
                         }
                         case 6:{

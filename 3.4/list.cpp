@@ -135,11 +135,11 @@ template<typename T>
 T LinkedList<T>::get(int index){
     if(head == NULL){
         cout<<"Linked list is empty."<< endl;
-        return -33333;
+        return {};
     }
     if(index >= length() || index < 0){
         cout<<"Index is out of range."<< endl;
-        return -33333;
+        return {};
     }
     if(index == 0){
         return head->data;
