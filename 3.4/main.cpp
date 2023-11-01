@@ -2,8 +2,8 @@
 #include "list.h"
 
 int main(){
-    LinkedList<double> list;
-    double data;
+    LinkedList<int> list;
+    int data;
     int index;
     cout << "List template." << endl;
     while(true){
@@ -12,10 +12,10 @@ int main(){
                           "2. Push back;\n\n"
                           "3. Pop front;\n"
                           "4. Pop back;\n\n"
-             <<BLUE<<"5. Display item at index;\n"
-                     "6. Display all the items;\n\n"
-             << RED << "99. Exit the program.\n\n" << RESET
-             << GREEN << "Input: " << RESET;
+                  <<BLUE<<"5. Display item at index;\n"
+                          "6. Display all the items;\n\n"
+                  <<RED<< "99. Exit the program.\n\n" << RESET
+                  <<GREEN<<"Input: " << RESET;
         int choice;
         while (true){
             if (cin >> choice && (choice>=1 && choice <=6) || choice == 99){
