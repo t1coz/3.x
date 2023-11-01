@@ -1,63 +1,83 @@
 #ifndef INC_3_4_LIST_H
 #define INC_3_4_LIST_H
 #include <iostream>
+
 using namespace std;
-template<typename T>
-class Node{
-private:
-    T data;
-    Node<T>* next;
-    template<typename U>friend class LinkedList;
+template <typename T>
+class Node {
 public:
-    Node(){this->next = NULL;}
-    ~Node(){delete [] next;}
+    T data;
+    Node* next;
+    Node(T data) : data(data), next(nullptr) {}
 };
 
-template<typename T>
-class LinkedList{
+template <typename T>
+class LinkedList {
 private:
     Node<T>* head;
+    Node<T>* tail;
 public:
-    LinkedList(){this->head = NULL;}
-    void add(T item);
-    void addFront(T item);
-    int length();
-    void displayAll();
-    void remove();
-    void removeFront();
-    T get(int index);
-    ~LinkedList(){delete [] head;}
-};
-template<typename T>
-void LinkedList<T>::add(T item){
-    Node<T>* node = new Node<T>[1];
-    node->data = item;
-    if(head == NULL){
-        head = node;
-        cout<<"First node has been added."<<endl;
-        return;
-    }
-    Node<T>* temp = head;
-    while(temp->next != NULL){
-        temp = temp->next;
-    }
-    temp->next = node;
-    cout<<"New node has been added at the back."<<endl;
-}
-template<typename T>
-void LinkedList<T>::addFront(T item){
-    Node<T>* node = new Node<T>[1];
-    node->data = item;
-    if(head == NULL){
-        head = node;
-        cout<<"First node has been added."<<endl;
-        return;
-    }
-    node->next = head;
-    head = node;
-    cout<<"New node has been added at the front."<<endl;
-}
+    LinkedList() : head(nullptr), tail(nullptr) {}
 
+    void pushFront(T data);
+    void pushBack(T data);
+
+    void popFront();
+    void popBack();
+
+    int length();
+    void peek(int index);
+
+    void displayAll();
+};
+
+template<typename T>
+void LinkedList<T>::pushFront(T data) {
+    Node<T>* newNode = new Node<T>(data);
+    newNode->next = head;
+    head = newNode;
+    if (tail == nullptr) {
+        tail = head;
+    }
+}
+template<typename T>
+void LinkedList<T>::pushBack(T data) {
+    Node<T>* newNode = new Node<T>(data);
+    if (tail == nullptr) {
+        head = tail = newNode;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
+    }
+}
+template<typename T>
+void LinkedList<T>::popFront(){
+    if (head != nullptr) {
+        Node<T>* tempNode = head;
+        head = head->next;
+        delete tempNode;
+        if (head == nullptr) {
+            tail = nullptr;
+        }
+    }
+}
+template<typename T>
+void LinkedList<T>::popBack(){
+    if (tail != nullptr) {
+        if (head == tail) {
+            delete head;
+            head = tail = nullptr;
+        } else {
+            Node<T>* tempNode = head;
+            while (tempNode->next != tail) {
+                tempNode = tempNode->next;
+            }
+            delete tail;
+            tail = tempNode;
+            tail->next = nullptr;
+        }
+    }
+}
 template<typename T>
 int LinkedList<T>::length(){
     int len = 0;
@@ -69,73 +89,34 @@ int LinkedList<T>::length(){
     return len;
 }
 template<typename T>
+void LinkedList<T>::peek(int index) {
+    Node<T>* tempNode = head;
+    int count = 0;
+    if(index >= length() || index < 0){
+        cout<<"Index is out of range."<< endl;
+        return;
+    }
+    while (tempNode != nullptr && count < index) {
+        tempNode = tempNode->next;
+        count++;
+    }
+    if (tempNode != nullptr) {
+        cout << "Element at index " << index+1 << ": " << tempNode->data << endl;
+    } else {
+        cout << "Index out of range." << endl;
+    }
+}
+template<typename T>
 void LinkedList<T>::displayAll(){
     if(head == NULL){
         cout<<"Linked list is empty."<<endl;
         return;
     }
-    Node<T>* temp = head;
-    while(temp != NULL){
-        cout<<temp->data<<"; ";
-        temp = temp->next;
+    Node<T>* tempNode = head;
+    while (tempNode != nullptr) {
+        cout << tempNode->data << "; ";
+        tempNode = tempNode->next;
     }
+    cout << endl;
 }
-template<typename T>
-void LinkedList<T>::remove(){
-    if(head == NULL){
-        cout<<"Linked list is empty."<<endl;
-        return;
-    }
-    if(head->next == NULL){
-        head = NULL;
-        cout<<"Last item has been removed."<<endl;
-        return;
-    }
-
-    Node<T>* temp = head;
-    while(temp != NULL){
-        if(temp->next->next == NULL){
-            temp->next = NULL;
-            cout<<"Last item has been removed."<<endl;
-            break;
-        }
-        temp = temp->next;
-    }
-}
-
-template<typename T>
-void LinkedList<T>::removeFront(){
-    if(head == NULL){
-        cout<<"Linked list is empty."<<endl;
-        return;
-    }
-    head = head->next;
-    cout<<"Front item has been removed."<<endl;
-}
-template<typename T>
-T LinkedList<T>::get(int index){
-    if(head == NULL){
-        cout<<"Linked list is empty."<< endl;
-        return {};
-    }
-    if(index >= length() || index < 0){
-        cout<<"Index is out of range."<< endl;
-        return {};
-    }
-    if(index == 0){
-        return head->data;
-    }
-    int count = 0;
-    T res;
-    Node<T>* temp = head;
-    while(temp != NULL){
-        if(count++ == index){
-            res = temp->data;
-            break;
-        }
-        temp = temp->next;
-    }
-    return res;
-}
-
 #endif

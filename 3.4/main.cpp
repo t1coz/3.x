@@ -27,27 +27,27 @@ int main(){
                         case 1:{
                             cout<<"Enter an item to insert:"<<endl;
                             cin>>data;
-                            list.addFront(data);
+                            list.pushFront(data);
                             break;
                         }
                         case 2:{
                             cout<<"Enter an item to insert:"<<endl;
                             cin>>data;
-                            list.add(data);
+                            list.pushBack(data);
                             break;
                         }
                         case 3:{
-                            list.removeFront();
+                            list.popFront();
                             break;
                         }
                         case 4:{
-                            list.remove();
+                            list.popBack();
                             break;
                         }
                         case 5:{
                             cout<<"Enter the index:"<<endl;
                             cin>>index;
-                            cout<<"Item at the index "<<index<<": "<<list.get(index-1)<<"\n";
+                            list.peek(index-1);
                             break;
                         }
                         case 6:{
